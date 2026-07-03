@@ -22,7 +22,3 @@ begins — see the docs below.
 
 ## Getting started
 TBD once implementation starts.
-
-## AI Tools Used
-_TBD — fill in briefly as work progresses: which tools, what was tested, what was
-changed or rejected and why._
