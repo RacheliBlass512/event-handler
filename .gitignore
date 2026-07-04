@@ -1,1 +1,44 @@
+## .NET / Visual Studio / Rider
+bin/
+obj/
+*.user
+.vs/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.userosscache
+*.sln.docstates
+[Dd]ebug/
+[Rr]elease/
+[Ll]og/
+[Ll]ogs/
+
+# Rider
+.idea/
+
+# Test results
+TestResults/
+*.trx
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## Angular / Node (frontend, once added)
+node_modules/
+frontend/dist/
+frontend/.angular/
+npm-debug.log*
+yarn-error.log*
+
+## Environment / secrets
+*.env
+appsettings.*.local.json
+
+## Claude Code
 .claude/settings.local.json
+
+## OS
+.DS_Store
+Thumbs.db

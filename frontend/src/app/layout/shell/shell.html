@@ -1,0 +1,19 @@
+<header>
+  <nav>
+    @if (currentUser(); as user) {
+      @if (user.role === UserRole.Dispatcher) {
+        <a routerLink="/dispatcher">Dashboard</a>
+        <a routerLink="/dispatcher/technicians">Technicians</a>
+      } @else {
+        <a routerLink="/technician">My Events</a>
+        <a routerLink="/technician/available">Available</a>
+      }
+      <span>{{ user.displayName }}</span>
+      <button type="button" (click)="logout()">Log out</button>
+    }
+  </nav>
+</header>
+
+<main>
+  <router-outlet />
+</main>

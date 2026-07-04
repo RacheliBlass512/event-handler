@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/backend/" />
+  <Folder Name="/backend/src/">
+    <Project Path="backend/src/EventHandler.Agent/EventHandler.Agent.csproj" />
+    <Project Path="backend/src/EventHandler.Contracts/EventHandler.Contracts.csproj" />
+    <Project Path="backend/src/EventHandler.Domain/EventHandler.Domain.csproj" />
+    <Project Path="backend/src/EventHandler.Server/EventHandler.Server.csproj" />
+  </Folder>
+  <Folder Name="/backend/tests/">
+    <Project Path="backend/tests/EventHandler.Domain.Tests/EventHandler.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

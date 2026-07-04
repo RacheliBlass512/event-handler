@@ -380,3 +380,75 @@ surface — now purely about the transition table (SM writes no history):
 ## 12. Out of scope (this session)
 No business logic, no EF migration, no real JWT/crypto, no working E2E data flow, no real Web Push
 delivery, no Agent outbox, no source-auth code — all deferred or documented-only.
+
+---
+
+## 13. Implementation TODOs
+
+Execution order: **tooling verification → backend → frontend → integration check.** Check items
+off only once actually true (installed/builds/runs) — not when merely started.
+
+### 13.1 Tooling — verify / install latest versions
+- [x] Confirm .NET SDK is 10.x (`dotnet --version`) — 10.0.300.
+- [x] Upgrade Node.js to satisfy latest Angular CLI (`^22.22.3 || ^24.15.0 || >=26.0.0`) — upgraded
+      via `winget upgrade --id OpenJS.NodeJS.22 --source winget` (same 22.x LTS line, no major
+      jump); now v22.23.1.
+- [x] Install Angular CLI at latest (`npm i -g @angular/cli@latest`) — v22.0.5, no engine warnings.
+- [x] Confirm `git --version` — 2.50.1.
+- [ ] SQL Server / LocalDB reachable (your own setup) — confirm a connection string works before
+      the integration-check step; not required before backend/frontend scaffolding starts, since
+      the skeleton has no EF migration yet.
+
+### 13.2 Backend — build in dependency order
+- [x] `EventHandler.sln` created; solution structure per §6.
+- [x] `EventHandler.Contracts` — `IncomingEventDto`, `IntakeResponseDto` (§7).
+- [x] `EventHandler.Domain` — entities, enums, `IEventStateMachine` + stub, ports (§7, §3).
+- [x] `EventHandler.Domain.Tests` — xUnit project wired up, named/skipped test stubs (§10).
+- [x] `EventHandler.Server` — Application layer (services/interfaces, stub bodies).
+- [x] `EventHandler.Server` — Infrastructure layer (`AppDbContext`, repositories, stub bodies).
+- [x] `EventHandler.Server` — Api layer (DTOs, Controllers, `EventsHub`, JWT auth wiring,
+      `Program.cs`, `appsettings`).
+- [x] `EventHandler.Agent` — `IEventSource`/`IEventSink`/`IServerClient`, `MockEventSource`,
+      `EventIngestionService`, `HttpServerClient`, `SourceHostService`, `Program.cs` (§8).
+- [x] **Backend verification** (§11): `dotnet build` succeeds solution-wide; `dotnet test`
+      discovers `EventHandler.Domain.Tests`; `dotnet run` on `Server` starts and Swagger lists all
+      endpoints; `dotnet run` on `Agent` starts and `MockEventSource` fires.
+      Verified: `dotnet build`/`dotnet test` clean (8 SM tests discovered, skipped as designed);
+      `/health` → Healthy, `/openapi/v1.json` lists all endpoints; running Server + Agent together
+      shows MockEventSource firing every interval, POSTing to `/api/intake/events`, hitting the
+      stub `CreateFromIntakeAsync` (expected 500, logged and retried next interval) — full wiring
+      path confirmed end to end.
+
+### 13.3 Frontend — build
+- [x] Angular app scaffolded (`ng new`, standalone, routing) under `frontend/`.
+- [x] `core/` — auth (real HTTP wiring), realtime (`signalr.service`, real connect handshake),
+      notifications (`push.service` stub), api (`events.api.ts`, real HTTP wiring), models (§9).
+- [x] `features/` — auth/login (real form, real `AuthService.login()` call — the frontend's front
+      door, mirroring `MockEventSource` on the Agent side), dispatcher/*, technician/* (stub
+      components: placeholder + TODO). `assign`/`transfer`/`status-update`/`notes` scaffolded as
+      embeddable components, not top-level routes (they belong inside event-detail).
+- [x] `shared/` (`EventStatusLabelPipe` — real, trivial formatting, reused across event
+      list/detail screens), `layout/` — `Shell` with role-aware nav + logout.
+- [x] `app.routes.ts` + `app.config.ts` — role-guarded routes (dispatcher/*, technician/*, login),
+      `provideHttpClient` with the JWT interceptor.
+- [x] **Frontend verification** (§11): `ng build` clean (lazy chunk per route confirms wiring);
+      `ng serve` boots on :4200, `/`, `/login`, `/dispatcher` all serve the SPA shell.
+
+### 13.4 Integration check — backend + frontend together
+- [x] Run `Server` + `Agent` + `ng serve` simultaneously — all three run concurrently without
+      port/config conflicts (Server :5099, Agent client-only, Angular :4200).
+- [ ] Angular login screen loads against the running `Server` (even if `AuthService.Login` is
+      still a stub — confirm the HTTP call reaches the controller, not a CORS/connectivity dead
+      end). **Not yet exercised via a real browser click-through** — the Login component's HTTP
+      wiring is in place (§13.3) but a live form-submit-to-Server request hasn't been observed
+      firsthand yet.
+- [ ] `SignalrService` connects to `EventsHub` (connection established, even if no real messages
+      flow yet). **Blocked**: no JWT can be minted yet since `AuthService.LoginAsync` /
+      `JwtTokenService.GenerateToken` are stubs (§12 explicitly keeps real JWT out of scope this
+      pass) — `SignalrService.connect()` will fail the handshake until login actually returns a
+      token. Known gap between §12 and this item, flagged earlier.
+- [x] Confirm no console/build errors when both processes run at once — `ng build` and
+      `dotnet build` both clean; CORS origin (`http://localhost:4200`) and Server base URL
+      (`http://localhost:5099`) are consistently configured on both sides.
+- [ ] Re-check the full traceability list (§11) now that both sides exist — pending a full
+      pass once the two items above are unblocked.
