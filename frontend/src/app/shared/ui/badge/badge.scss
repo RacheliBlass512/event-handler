@@ -1,0 +1,40 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+@each $tone in info, success, warning, danger, neutral {
+  .tone-#{$tone}.variant-soft {
+    background: var(--tone-#{$tone}-bg);
+    color: var(--tone-#{$tone}-fg);
+    border: 1px solid var(--tone-#{$tone}-border);
+  }
+
+  .tone-#{$tone}.variant-dot {
+    color: var(--tone-#{$tone}-fg);
+  }
+}
+
+.tone-primary.variant-soft {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+  border: 1px solid transparent;
+}
+
+.tone-primary.variant-dot {
+  color: var(--mat-sys-primary);
+}

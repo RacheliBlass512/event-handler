@@ -1,0 +1,46 @@
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--mat-sys-surface-container);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.625rem;
+  flex-shrink: 0;
+}
+
+@each $tone in info, success, warning, danger, neutral {
+  .stat-icon.tone-#{$tone} {
+    background: var(--tone-#{$tone}-bg);
+    color: var(--tone-#{$tone}-fg);
+  }
+}
+
+.stat-icon.tone-primary {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.stat-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.8125rem;
+  color: var(--mat-sys-on-surface-variant);
+}
