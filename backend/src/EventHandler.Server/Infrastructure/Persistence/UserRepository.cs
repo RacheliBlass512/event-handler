@@ -1,5 +1,7 @@
 using EventHandler.Domain.Abstractions;
 using EventHandler.Domain.Entities;
+using EventHandler.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventHandler.Server.Infrastructure.Persistence;
 
@@ -13,17 +15,11 @@ public sealed class UserRepository : IUserRepository
     }
 
     public Task<User?> GetByIdAsync(Guid id, CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+        => _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id, ct);
 
     public Task<User?> GetByUsernameAsync(string username, CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+        => _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username, ct);
 
-    public Task<IReadOnlyList<User>> ListTechniciansAsync(CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IReadOnlyList<User>> ListTechniciansAsync(CancellationToken ct)
+        => await _dbContext.Users.Where(u => u.Role == UserRole.Technician).ToListAsync(ct);
 }

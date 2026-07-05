@@ -26,6 +26,9 @@ every architectural decision and every code block as if they wrote it from scrat
   deliverables from the assignment. Proactively check items off the moment they become
   true (code exists and works) — don't wait to be asked, and don't check something off
   based on a plan or discussion alone.
+- **docs/plans/** — all implementation plans go here (not the default
+  `~/.claude/plans/` location). Give each plan a descriptive filename, not an
+  auto-generated slug.
 
 ## Tech stack
 - Backend: **.NET Core** (chosen; rationale still needs the user's confirmation/edits).

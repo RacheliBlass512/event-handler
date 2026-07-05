@@ -8,5 +8,6 @@
   </Folder>
   <Folder Name="/backend/tests/">
     <Project Path="backend/tests/EventHandler.Domain.Tests/EventHandler.Domain.Tests.csproj" />
+    <Project Path="backend/tests/EventHandler.Server.Tests/EventHandler.Server.Tests.csproj" />
   </Folder>
 </Solution>

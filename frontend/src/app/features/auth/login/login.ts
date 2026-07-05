@@ -5,11 +5,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { UserRole } from '../../../core/models';
 
-/**
- * Front door of the frontend's E2E path (skeleton-plan.md §13.4): a real form that actually
- * calls AuthService.login(), so the wiring to the Server can be verified even though the
- * backend's AuthService.LoginAsync is still a stub.
- */
+/** Front door of the frontend's E2E path (skeleton-plan.md §13.4): a real form backed by the
+ * real AuthService.login() call against the Server's /api/auth/login endpoint. */
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -45,7 +42,7 @@ export class Login {
       error: (error: HttpErrorResponse) => {
         this.submitting.set(false);
         this.errorMessage.set(
-          `Login failed (${error.status}). Expected until the backend AuthService is implemented.`,
+          error.status === 401 ? 'Invalid username or password.' : `Login failed (${error.status}).`,
         );
       },
     });

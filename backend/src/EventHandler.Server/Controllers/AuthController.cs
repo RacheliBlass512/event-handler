@@ -21,6 +21,11 @@ public sealed class AuthController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> Login(LoginRequestDto request, CancellationToken ct)
     {
         var result = await _authService.LoginAsync(request.Username, request.Password, ct);
+        if (result is null)
+        {
+            return Unauthorized();
+        }
+
         return Ok(new LoginResponseDto(result.Token, result.Role, result.DisplayName, result.ExpiresAt));
     }
 }
