@@ -4,5 +4,5 @@ namespace EventHandler.Agent.Sources;
 
 public interface IEventSink
 {
-    Task PublishAsync(IncomingEventDto evt, CancellationToken ct);
+    Task<IntakeResponseDto> PublishAsync(IncomingEventDto evt, CancellationToken ct);
 }

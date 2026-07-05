@@ -15,9 +15,9 @@ public sealed class EventIngestionService : IEventSink
         _logger = logger;
     }
 
-    public async Task PublishAsync(IncomingEventDto evt, CancellationToken ct)
+    public async Task<IntakeResponseDto> PublishAsync(IncomingEventDto evt, CancellationToken ct)
     {
         _logger.LogInformation("Ingesting event {SourceName}/{SourceEventId}", evt.SourceName, evt.SourceEventId);
-        await _serverClient.SendAsync(evt, ct);
+        return await _serverClient.SendAsync(evt, ct);
     }
 }

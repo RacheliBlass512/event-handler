@@ -15,7 +15,7 @@ true — code exists and runs, not just discussed.
 - [ ] AI tools/sources used, and what was tested/changed/rejected
 
 ## E2E Implementation
-- [ ] External source → Agent
+- [x] External source → Agent
 - [ ] Agent → Server
 - [ ] Server → Database
 - [ ] Server → Dispatcher receives alert (real-time)

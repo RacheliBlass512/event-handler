@@ -3,7 +3,7 @@ using EventHandler.Agent.Ingestion;
 using EventHandler.Agent.ServerClient;
 using EventHandler.Agent.Sources;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 var serverBaseUrl = builder.Configuration["Server:BaseUrl"] ?? "http://localhost:5027/";
 
@@ -13,12 +13,22 @@ builder.Services.AddHttpClient<IServerClient, HttpServerClient>(client =>
 });
 
 builder.Services.AddSingleton<IEventSink, EventIngestionService>();
-builder.Services.AddSingleton<IEventSource, MockEventSource>();
 
-// Onboarding a new source: implement IEventSource, register it here, add its config section.
-// e.g. builder.Services.AddSingleton<IEventSource, SensorHttpSource>();
+// Onboarding a new source: poll-style → implement IEventSource, push-style → implement
+// IHttpEventSource. Either way: register it here, add its config section.
+builder.Services.AddSingleton<IHttpEventSource, SensorHttpSource>();
 
 builder.Services.AddHostedService<SourceHostService>();
 
-var host = builder.Build();
-host.Run();
+var app = builder.Build();
+
+var sink = app.Services.GetRequiredService<IEventSink>();
+foreach (var source in app.Services.GetServices<IHttpEventSource>())
+{
+    source.MapRoutes(app, sink);
+}
+
+app.Run();
+
+// Marker for WebApplicationFactory<Program> in EventHandler.Agent.Tests.
+public partial class Program { }
