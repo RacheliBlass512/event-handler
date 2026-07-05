@@ -1,0 +1,6 @@
+<span class="badge" [class]="'tone-' + tone() + ' variant-' + variant()">
+  @if (variant() === 'dot') {
+    <span class="dot"></span>
+  }
+  <ng-content></ng-content>
+</span>
