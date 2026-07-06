@@ -42,11 +42,14 @@ builder.Services.AddScoped<DbSeeder>();
 
 // --- Api ---
 // String enums on the wire (not the default int) so the Angular models can mirror the C#
-// enum names directly instead of hardcoding numeric values.
+// enum names directly instead of hardcoding numeric values. SignalR has its own serializer,
+// so it needs the same converter — otherwise pushed DTOs carry int enums while REST carries
+// strings, and the frontend can only understand one contract.
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddOpenApi();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR()
+    .AddJsonProtocol(options => options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddHealthChecks();
 
 builder.Services.AddCors(options =>
