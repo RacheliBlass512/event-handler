@@ -22,6 +22,9 @@ every architectural decision and every code block as if they wrote it from scrat
   judgment), and act directly on plumbing/scaffolding that has no real judgment call.
 
 ## Living documents — keep these current
+- **`docs/` is local-only** (gitignored, user's decision): plans, the checklist, and
+  design docs are working documents for the user, not part of the committed deliverable.
+  Docs committed before this decision remain in history; don't commit new ones.
 - **[docs/REQUIREMENTS_CHECKLIST.md](docs/REQUIREMENTS_CHECKLIST.md)** — tracks graded
   deliverables from the assignment. Proactively check items off the moment they become
   true (code exists and works) — don't wait to be asked, and don't check something off
