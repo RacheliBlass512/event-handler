@@ -13,3 +13,22 @@ html,
 body {
   height: 100%;
 }
+
+
+// Let the Snackbar component's own card fill the MatSnackBar container (which sits outside
+// component view encapsulation), instead of Material's default padding/background.
+// The extra .mat-mdc-snack-bar-container class out-specifies Material's own rules,
+// which are injected after this stylesheet.
+.app-snackbar-panel.mat-mdc-snack-bar-container {
+  --mat-snack-bar-container-color: transparent;
+
+  .mat-mdc-snackbar-surface {
+    padding: 0;
+    min-width: 0;
+    box-shadow: none;
+  }
+
+  .mdc-snackbar__label {
+    padding: 0;
+  }
+}
