@@ -7,9 +7,9 @@ namespace EventHandler.Server.Api.Hubs;
 
 /// <summary>
 /// Connection/presence handshake is implemented for real (skeleton-plan.md §13.4 expects a
-/// live SignalR connection). Pushing EventCreated/EventUpdated/EventAssigned/Alert to groups
-/// is driven externally by NotificationService (still a stub) via IHubContext — this class
-/// has no client-invocable RPC methods of its own.
+/// live SignalR connection). Pushing EventCreated/EventUpdated/EventAssigned/Alert is driven
+/// externally by NotificationService via IHubContext, targeting the per-user "user:{id}" groups
+/// this hub maintains — this class has no client-invocable RPC methods of its own.
 /// </summary>
 [Authorize]
 public sealed class EventsHub : Hub
@@ -27,11 +27,6 @@ public sealed class EventsHub : Hub
         _presenceTracker.MarkConnected(userId, Context.ConnectionId);
 
         await Groups.AddToGroupAsync(Context.ConnectionId, $"user:{userId}");
-        if (Context.User?.IsInRole("Dispatcher") == true)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, "role:Dispatcher");
-        }
-
         await base.OnConnectedAsync();
     }
 

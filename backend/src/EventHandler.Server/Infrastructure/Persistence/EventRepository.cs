@@ -1,5 +1,6 @@
 using EventHandler.Domain.Abstractions;
 using EventHandler.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventHandler.Server.Infrastructure.Persistence;
 
@@ -13,19 +14,16 @@ public sealed class EventRepository : IEventRepository
     }
 
     public Task<Event?> GetByIdAsync(Guid id, CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+        => _dbContext.Events.FirstOrDefaultAsync(e => e.Id == id, ct);
 
-    public Task<IReadOnlyList<Event>> ListAllAsync(CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IReadOnlyList<Event>> ListAllAsync(CancellationToken ct)
+        => await _dbContext.Events.OrderByDescending(e => e.CreatedAt).ToListAsync(ct);
 
-    public Task<IReadOnlyList<Event>> ListAssignedToAsync(Guid technicianId, CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IReadOnlyList<Event>> ListAssignedToAsync(Guid technicianId, CancellationToken ct)
+        => await _dbContext.Events
+            .Where(e => e.AssignedTechnicianId == technicianId)
+            .OrderByDescending(e => e.CreatedAt)
+            .ToListAsync(ct);
 
     public Task AddAsync(Event evt, CancellationToken ct)
     {

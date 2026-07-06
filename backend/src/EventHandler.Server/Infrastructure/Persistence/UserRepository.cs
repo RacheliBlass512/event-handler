@@ -22,4 +22,7 @@ public sealed class UserRepository : IUserRepository
 
     public async Task<IReadOnlyList<User>> ListTechniciansAsync(CancellationToken ct)
         => await _dbContext.Users.Where(u => u.Role == UserRole.Technician).ToListAsync(ct);
+
+    public async Task<IReadOnlyList<User>> ListDispatchersAsync(CancellationToken ct)
+        => await _dbContext.Users.Where(u => u.Role == UserRole.Dispatcher).ToListAsync(ct);
 }

@@ -65,6 +65,8 @@ public class AuthServiceTests
         public Task<User?> GetByUsernameAsync(string username, CancellationToken ct) => Task.FromResult(user);
         public Task<IReadOnlyList<User>> ListTechniciansAsync(CancellationToken ct)
             => Task.FromResult<IReadOnlyList<User>>([]);
+        public Task<IReadOnlyList<User>> ListDispatchersAsync(CancellationToken ct)
+            => Task.FromResult<IReadOnlyList<User>>([]);
     }
 
     private sealed class FakePasswordHasher(string expectedPassword) : IPasswordHasher

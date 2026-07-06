@@ -51,6 +51,10 @@ public sealed class EventService : IEventService
 
         await _eventRepository.AddAsync(evt, ct);
         await _unitOfWork.SaveChangesAsync(ct);
+
+        // Best-effort real-time alert. The notifier never throws (see INotificationService), so a
+        // delivery hiccup can't 500 the Agent intake for an event that is already persisted.
+        await _notificationService.NotifyEventCreatedAsync(evt, ct);
         return evt;
     }
 
@@ -81,7 +85,11 @@ public sealed class EventService : IEventService
 
     public Task<IReadOnlyList<Event>> ListForUserAsync(Guid userId, UserRole role, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        // Row-level permission enforced here, not just in the UI: a dispatcher sees every event,
+        // a technician only the events assigned to them.
+        return role == UserRole.Dispatcher
+            ? _eventRepository.ListAllAsync(ct)
+            : _eventRepository.ListAssignedToAsync(userId, ct);
     }
 
     public Task<IReadOnlyList<EventHistoryEntry>> GetHistoryAsync(Guid eventId, CancellationToken ct)
