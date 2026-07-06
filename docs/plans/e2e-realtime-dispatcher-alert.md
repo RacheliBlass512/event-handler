@@ -81,11 +81,11 @@ Covers:
 - **SignalR handling:** extend `SignalrService` (`core/realtime/signalr.service.ts`) with a typed
   created-event stream (`onEventCreated`), and own the connect/reconnect/disconnect lifecycle for a
   logged-in dispatcher.
-- **Style login:** finish the login screen styling — the app's front door, currently unstyled.
 
 ## Big Task 3 — Frontend: dispatcher view (login + events table + live notification)
 **Goal:** the dispatcher sees events and gets alerted in real time — the visible end of the flow.
 Covers:
+- **Style login:** finish the login screen styling — the app's front door, currently unstyled.
 - **Show events table:** replace the empty dispatcher dashboard stub with a real events table,
   seeded from the API (Task 2) and reusing existing shared UI (`badge`/`stat-card`, status/priority pipes).
 - **Show notification when a new one comes:** on the `onEventCreated` push (Task 2), prepend the new
