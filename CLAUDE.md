@@ -44,3 +44,7 @@ every architectural decision and every code block as if they wrote it from scrat
 - A Git repository with real history is itself a graded deliverable — don't squash the
   story of decisions away.
 - Follow the standard commit rules: only commit when the user asks.
+
+## Consistency
+- Favor consistency across the codebase — if keeping things consistent requires an
+  architectural or global change, make it rather than working around it locally.
