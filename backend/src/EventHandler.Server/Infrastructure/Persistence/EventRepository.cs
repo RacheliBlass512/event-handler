@@ -29,6 +29,9 @@ public sealed class EventRepository : IEventRepository
 
     public Task AddAsync(Event evt, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        // Synchronous Add (not AddAsync): the Id is generated in Server code, not by the DB,
+        // so there's no store-generated-key round-trip to await.
+        _dbContext.Events.Add(evt);
+        return Task.CompletedTask;
     }
 }

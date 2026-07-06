@@ -7,6 +7,7 @@ export interface EventDto {
   title: string;
   description: string;
   sourceName: string;
+  sourceEventId: string;
   location: string;
   status: EventStatus;
   priority: Priority;

@@ -3,6 +3,5 @@
   "sourceEventId": "sim-002",
   "description": "Payload without a title — should be rejected with 400.",
   "location": "Hangar 3, north wall",
-  "occurredAt": "2026-07-06T10:05:00+03:00",
-  "severity": "Normal"
+  "priority": "Normal"
 }

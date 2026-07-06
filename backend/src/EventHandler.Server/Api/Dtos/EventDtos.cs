@@ -7,6 +7,7 @@ public sealed record EventDto(
     string Title,
     string Description,
     string SourceName,
+    string SourceEventId,
     string Location,
     EventStatus Status,
     Priority Priority,

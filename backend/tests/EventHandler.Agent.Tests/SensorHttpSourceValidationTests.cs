@@ -11,8 +11,8 @@ public class SensorHttpSourceValidationTests
         Title: "Title",
         Description: "Description",
         Location: "Location",
-        OccurredAt: DateTimeOffset.UtcNow,
-        Severity: "Normal");
+        CreatedAt: DateTime.UtcNow,
+        Priority: "Normal");
 
     [Fact]
     public void ValidPayload_Passes()

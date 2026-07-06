@@ -25,9 +25,33 @@ public sealed class EventService : IEventService
         _notificationService = notificationService;
     }
 
-    public Task<Event> CreateFromIntakeAsync(IncomingEventDto intake, CancellationToken ct)
+    public async Task<Event> CreateFromIntakeAsync(IncomingEventDto intake, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        // The Agent sends Priority as a string (the enum's name); parse it here — the wire
+        // contract stays dependency-free of Domain. Unknown/blank values fall back to Normal
+        // rather than rejecting the intake (safe fail-open for this trust boundary).
+        var priority = Enum.TryParse<Priority>(intake.Priority, ignoreCase: true, out var parsed)
+            ? parsed
+            : Priority.Normal;
+
+        var evt = new Event
+        {
+            Id = Guid.NewGuid(),
+            Title = intake.Title,
+            Description = intake.Description,
+            SourceName = intake.SourceName,
+            SourceEventId = intake.SourceEventId,
+            Location = intake.Location,
+            Status = EventStatus.New,
+            Priority = priority,
+            AssignedTechnicianId = null,
+            CreatedAt = intake.CreatedAt,
+            UpdatedAt = DateTime.UtcNow,
+        };
+
+        await _eventRepository.AddAsync(evt, ct);
+        await _unitOfWork.SaveChangesAsync(ct);
+        return evt;
     }
 
     public Task AssignAsync(Guid eventId, Guid technicianId, Guid dispatcherId, CancellationToken ct)

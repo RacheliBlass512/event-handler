@@ -11,5 +11,5 @@ public sealed record IncomingEventDto(
     string Title,
     string Description,
     string Location,
-    DateTimeOffset OccurredAt,
-    string? Severity);
+    DateTime CreatedAt,
+    string Priority);

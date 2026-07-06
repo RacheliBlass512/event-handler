@@ -10,7 +10,7 @@ public class Event
 
     /// <summary>Denormalized provenance copied from the intake payload — no Source table/FK.</summary>
     public string SourceName { get; set; } = string.Empty;
-
+    public string SourceEventId { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
     public EventStatus Status { get; set; }
     public Priority Priority { get; set; }

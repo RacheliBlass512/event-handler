@@ -16,8 +16,8 @@ true — code exists and runs, not just discussed.
 
 ## E2E Implementation
 - [x] External source → Agent
-- [ ] Agent → Server
-- [ ] Server → Database
+- [x] Agent → Server
+- [x] Server → Database
 - [ ] Server → Dispatcher receives alert (real-time)
 
 ## Skeleton

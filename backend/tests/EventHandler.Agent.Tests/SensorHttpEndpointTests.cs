@@ -11,19 +11,25 @@ namespace EventHandler.Agent.Tests;
 public class SensorHttpEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
+    private readonly StubServerClient _stub = new();
 
     public SensorHttpEndpointTests(WebApplicationFactory<Program> factory)
     {
         _client = factory.WithWebHostBuilder(builder =>
             builder.ConfigureServices(services =>
-                services.AddSingleton<IServerClient, StubServerClient>()))
+                services.AddSingleton<IServerClient>(_stub)))
             .CreateClient();
     }
 
     private sealed class StubServerClient : IServerClient
     {
-        public Task<IntakeResponseDto> SendAsync(IncomingEventDto evt, CancellationToken ct) =>
-            Task.FromResult(new IntakeResponseDto(Guid.NewGuid(), Accepted: true));
+        public IncomingEventDto? Last { get; private set; }
+
+        public Task<IntakeResponseDto> SendAsync(IncomingEventDto evt, CancellationToken ct)
+        {
+            Last = evt;
+            return Task.FromResult(new IntakeResponseDto(Guid.NewGuid(), Accepted: true));
+        }
     }
 
     private static IncomingEventDto Valid() => new(
@@ -32,8 +38,8 @@ public class SensorHttpEndpointTests : IClassFixture<WebApplicationFactory<Progr
         Title: "Title",
         Description: "Description",
         Location: "Location",
-        OccurredAt: DateTimeOffset.UtcNow,
-        Severity: "Normal");
+        CreatedAt: DateTime.UtcNow,
+        Priority: "Normal");
 
     [Fact]
     public async Task ValidPayload_Returns202WithIntakeResponse()
@@ -44,6 +50,20 @@ public class SensorHttpEndpointTests : IClassFixture<WebApplicationFactory<Progr
         var body = await response.Content.ReadFromJsonAsync<IntakeResponseDto>();
         Assert.NotNull(body);
         Assert.True(body.Accepted);
+    }
+
+    [Fact]
+    public async Task Agent_StampsCreatedAt_IgnoringSourceSuppliedValue()
+    {
+        // Source sends a stale timestamp; the Agent must overwrite it with ingestion time.
+        var stale = Valid() with { CreatedAt = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc) };
+        var before = DateTime.UtcNow;
+
+        var response = await _client.PostAsJsonAsync("/events/sensor", stale);
+
+        Assert.Equal(HttpStatusCode.Accepted, response.StatusCode);
+        Assert.NotNull(_stub.Last);
+        Assert.InRange(_stub.Last!.CreatedAt, before.AddSeconds(-1), DateTime.UtcNow.AddSeconds(1));
     }
 
     [Fact]

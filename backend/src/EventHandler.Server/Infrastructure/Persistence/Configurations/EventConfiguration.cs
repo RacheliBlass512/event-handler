@@ -14,6 +14,7 @@ public sealed class EventConfiguration : IEntityTypeConfiguration<Event>
         builder.Property(e => e.Title).IsRequired().HasMaxLength(200);
         builder.Property(e => e.Description).IsRequired();
         builder.Property(e => e.SourceName).IsRequired().HasMaxLength(100);
+        builder.Property(e => e.SourceEventId).IsRequired().HasMaxLength(100);
         builder.Property(e => e.Location).IsRequired().HasMaxLength(200);
 
         // Status/Priority store as int by EF Core's default enum convention (skeleton-plan.md §5).

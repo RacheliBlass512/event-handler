@@ -11,8 +11,5 @@ public sealed class UnitOfWork : IUnitOfWork
         _dbContext = dbContext;
     }
 
-    public Task SaveChangesAsync(CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
+    public Task SaveChangesAsync(CancellationToken ct) => _dbContext.SaveChangesAsync(ct);
 }

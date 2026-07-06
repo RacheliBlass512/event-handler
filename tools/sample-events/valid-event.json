@@ -4,6 +4,5 @@
   "title": "Smoke detected in Hangar 3",
   "description": "Smoke level above threshold on detector S-12.",
   "location": "Hangar 3, north wall",
-  "occurredAt": "2026-07-06T10:00:00+03:00",
-  "severity": "High"
+  "priority": "High"
 }
