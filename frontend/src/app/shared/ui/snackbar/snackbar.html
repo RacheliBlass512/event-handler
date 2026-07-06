@@ -1,0 +1,21 @@
+<div class="snackbar" [class]="'tone-' + tone">
+  <span class="icon-circle">
+    <span class="material-symbols-outlined">{{ icon }}</span>
+  </span>
+
+  <div class="body">
+    <div class="head">
+      <span class="title">{{ data.title }}</span>
+      @if (data.timestamp) {
+        <span class="timestamp">{{ data.timestamp }}</span>
+      }
+    </div>
+    @if (data.message) {
+      <p class="message">{{ data.message }}</p>
+    }
+  </div>
+
+  <button type="button" class="close" (click)="dismiss()" aria-label="Dismiss">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>

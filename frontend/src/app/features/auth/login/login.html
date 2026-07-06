@@ -1,19 +1,66 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <h1>Log in</h1>
+<div class="login">
+  <aside class="marketing">
+    <div class="brand">
+      <span class="logo"><span class="material-symbols-outlined">bolt</span></span>
+      <span class="brand-name">FieldOps</span>
+    </div>
 
-  <label>
-    Username
-    <input type="text" formControlName="username" autocomplete="username" />
-  </label>
+    <div class="pitch">
+      <h1>
+        Incident Management<br />
+        <span class="accent">Made Simple</span>
+      </h1>
+      <p class="tagline">
+        A unified platform for field dispatchers and technicians to manage, track, and resolve
+        incidents in real time.
+      </p>
 
-  <label>
-    Password
-    <input type="password" formControlName="password" autocomplete="current-password" />
-  </label>
+      <ul class="features">
+        @for (feature of features; track feature) {
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            {{ feature }}
+          </li>
+        }
+      </ul>
+    </div>
+  </aside>
 
-  <button type="submit" [disabled]="form.invalid || submitting()">Log in</button>
+  <section class="form-panel">
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <h2>Welcome back</h2>
+      <p class="subtitle">Sign in to your account to continue</p>
 
-  @if (errorMessage()) {
-    <p class="error">{{ errorMessage() }}</p>
-  }
-</form>
+      <label class="field">
+        <span class="label">Username</span>
+        <input type="text" formControlName="username" autocomplete="username" placeholder="Username" />
+      </label>
+
+      <label class="field">
+        <span class="label">Password</span>
+        <span class="password">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+          />
+          <button type="button" class="reveal" (click)="togglePassword()"
+            [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+            <span class="material-symbols-outlined">
+              {{ showPassword() ? 'visibility_off' : 'visibility' }}
+            </span>
+          </button>
+        </span>
+      </label>
+
+      <button type="submit" class="submit" [disabled]="form.invalid || submitting()">
+        {{ submitting() ? 'Signing in…' : 'Sign In' }}
+      </button>
+
+      @if (errorMessage()) {
+        <p class="error">{{ errorMessage() }}</p>
+      }
+    </form>
+  </section>
+</div>

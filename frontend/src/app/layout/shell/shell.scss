@@ -1,0 +1,159 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100%;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: #0f1620;
+  color: #d1d5db;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: var(--mat-sys-primary);
+  color: #fff;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.role-pill {
+  align-self: flex-start;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mat-sys-primary);
+  border: 1px solid var(--mat-sys-primary);
+  border-radius: 999px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  color: #d1d5db;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    background: rgb(255 255 255 / 6%);
+  }
+
+  &.active {
+    background: var(--mat-sys-primary);
+    color: #fff;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.logout {
+  display: inline-flex;
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: #9ca3af;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.content {
+  min-width: 0;
+  overflow: auto;
+  background: var(--mat-sys-surface);
+}
+
+@media (max-width: 720px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex: 1;
+  }
+}

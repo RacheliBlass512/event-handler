@@ -23,8 +23,20 @@ export class Login {
     password: ['', Validators.required],
   });
 
+  readonly features = [
+    'Real-time incident tracking across all sources',
+    'Multi-source ingestion: IoT, external systems & manual',
+    'Dispatcher & Technician role-based workflows',
+    'Complete audit trail and activity history',
+  ];
+
   readonly submitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly showPassword = signal(false);
+
+  togglePassword(): void {
+    this.showPassword.update((v) => !v);
+  }
 
   submit(): void {
     if (this.form.invalid || this.submitting()) {

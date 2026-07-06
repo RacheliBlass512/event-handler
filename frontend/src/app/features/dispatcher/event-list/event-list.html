@@ -1,2 +1,54 @@
-<!-- TODO: dispatcher's list of all events (EventsApi.list()). -->
-<p>dispatcher event list — TODO</p>
+<header class="page-head">
+  <h1>Events</h1>
+  <span class="count">{{ events().length }}</span>
+</header>
+
+@if (error()) {
+  <p class="error-banner">{{ error() }}</p>
+}
+
+@if (events().length === 0) {
+  <app-empty-state
+    icon="inbox"
+    title="No events yet"
+    message="New events appear here in real time as they arrive."
+  />
+} @else {
+  <div class="table-scroll">
+    <table class="events">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Source</th>
+          <th>Last updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (event of events(); track event.id) {
+          <tr>
+            <td class="name">
+              <span class="title">{{ event.title }}</span>
+              <span class="description">{{ event.description }}</span>
+            </td>
+            <td>
+              <app-badge variant="dot" [tone]="event.status | eventStatusTone">
+                {{ event.status | eventStatusLabel }}
+              </app-badge>
+            </td>
+            <td>
+              <app-badge variant="dot" [tone]="event.priority | priorityTone">
+                {{ event.priority }}
+              </app-badge>
+            </td>
+            <td>
+              <app-badge tone="neutral">{{ event.sourceName }}</app-badge>
+            </td>
+            <td class="updated">{{ event.updatedAt | timeAgo }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

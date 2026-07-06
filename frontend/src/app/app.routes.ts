@@ -13,10 +13,7 @@ export const routes: Routes = [
     data: { role: UserRole.Dispatcher },
     loadComponent: () => import('./layout/shell/shell').then((m) => m.Shell),
     children: [
-      {
-        path: '',
-        loadComponent: () => import('./features/dispatcher/dashboard/dashboard').then((m) => m.Dashboard),
-      },
+      { path: '', pathMatch: 'full', redirectTo: 'events' },
       {
         path: 'events',
         loadComponent: () => import('./features/dispatcher/event-list/event-list').then((m) => m.EventList),
@@ -25,11 +22,6 @@ export const routes: Routes = [
         path: 'events/:id',
         loadComponent: () =>
           import('./features/dispatcher/event-detail/event-detail').then((m) => m.EventDetail),
-      },
-      {
-        path: 'technicians',
-        loadComponent: () =>
-          import('./features/dispatcher/technician-status/technician-status').then((m) => m.TechnicianStatus),
       },
     ],
   },

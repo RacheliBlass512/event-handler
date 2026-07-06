@@ -1,19 +1,39 @@
-<header>
-  <nav>
-    @if (currentUser(); as user) {
-      @if (user.role === UserRole.Dispatcher) {
-        <a routerLink="/dispatcher">Dashboard</a>
-        <a routerLink="/dispatcher/technicians">Technicians</a>
-      } @else {
-        <a routerLink="/technician">My Events</a>
-        <a routerLink="/technician/available">Available</a>
-      }
-      <span>{{ user.displayName }}</span>
-      <button type="button" (click)="logout()">Log out</button>
-    }
-  </nav>
-</header>
+@if (currentUser(); as user) {
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo"><span class="material-symbols-outlined">bolt</span></span>
+        <span class="brand-text">
+          <span class="brand-name">FieldOps</span>
+          <span class="brand-sub">Incident Management</span>
+        </span>
+      </div>
 
-<main>
-  <router-outlet />
-</main>
+      <span class="role-pill">{{ user.role }}</span>
+
+      <nav class="nav">
+        @for (item of navItems(); track item.link) {
+          <a [routerLink]="item.link" routerLinkActive="active" class="nav-item">
+            <span class="material-symbols-outlined">{{ item.icon }}</span>
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+
+      <div class="user">
+        <app-avatar [name]="user.displayName" size="sm" />
+        <span class="user-meta">
+          <span class="user-name">{{ user.displayName }}</span>
+          <span class="user-role">{{ user.role }}</span>
+        </span>
+        <button type="button" class="logout" (click)="logout()" aria-label="Log out">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+}
