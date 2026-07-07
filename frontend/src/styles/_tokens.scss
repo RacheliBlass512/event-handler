@@ -1,6 +1,21 @@
-// Semantic tone tokens for status/priority pills. Kept independent of Material's own
-// --mat-sys-* tokens so this palette never fights Material's theming.
+// Design tokens matching the reference demo (values extracted from its computed styles).
+// Kept independent of Material's own --mat-sys-* tokens so this palette never fights
+// Material's theming. Light values are demo-exact; dark values translate the same hues
+// (the demo is light-only — dark mode is our best-effort extension).
 :root {
+  --brand: #f97015; // demo uses the raw orange on buttons/active nav/logo in both schemes
+  --app-bg: light-dark(#f6f7f9, #11141a);
+  --surface: light-dark(#ffffff, #1b1f28);
+  --border: light-dark(#dcdfe4, #2b303b);
+  --text: light-dark(#1a1d23, #e2e4e9);
+  --text-muted: light-dark(#737b8c, #9aa1b0);
+
+  // The sidebar and login marketing panel are dark in both schemes, like the demo.
+  --panel-bg: #1b1f28;
+  --panel-border: #2b303b;
+  --panel-fg: #c4c9d4;
+  --panel-fg-bright: #e2e4e9;
+
   --tone-info-bg: light-dark(hsl(214 95% 93%), hsl(214 60% 16%));
   --tone-info-fg: light-dark(hsl(214 84% 32%), hsl(214 90% 80%));
   --tone-info-border: light-dark(hsl(214 90% 85%), hsl(214 50% 26%));

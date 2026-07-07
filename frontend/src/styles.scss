@@ -2,9 +2,10 @@
 @use './styles/tokens';
 
 body {
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+  background-color: var(--app-bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
   margin: 0;
   height: 100%;
 }
