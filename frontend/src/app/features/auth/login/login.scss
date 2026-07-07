@@ -1,3 +1,5 @@
+// Values taken from the demo's computed styles: 40px dark panel, 36px/700 hero,
+// 448px form on the app background, 40px controls with 6px radius.
 :host {
   display: block;
   height: 100%;
@@ -14,9 +16,9 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  padding: 3rem;
-  background: #0f1620;
-  color: #e5e7eb;
+  padding: 2.5rem;
+  background: var(--panel-bg);
+  color: var(--panel-fg-bright);
 }
 
 .brand {
@@ -29,11 +31,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.625rem;
-  background: var(--mat-sys-primary);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: var(--brand);
   color: #fff;
+
+  .material-symbols-outlined {
+    font-size: 1.25rem;
+  }
 }
 
 .brand-name {
@@ -48,21 +54,22 @@
 }
 
 .pitch h1 {
-  margin: 0 0 1rem;
-  font-size: 2.5rem;
+  margin: 0 0 0.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.25;
   color: #fff;
 
   .accent {
-    color: var(--mat-sys-primary);
+    color: var(--brand);
   }
 }
 
 .tagline {
   margin: 0 0 2rem;
-  color: #9ca3af;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.625;
+  color: var(--panel-fg);
 }
 
 .features {
@@ -71,17 +78,18 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1rem;
 
   li {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #d1d5db;
+    font-size: 0.875rem;
+    color: var(--panel-fg);
   }
 
   .material-symbols-outlined {
-    color: var(--mat-sys-primary);
+    color: var(--brand);
     font-size: 1.25rem;
   }
 }
@@ -91,24 +99,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem;
-  background: var(--mat-sys-surface-container-lowest, #f5f6f8);
+  padding: 1.5rem;
+  background: var(--app-bg);
 }
 
 .form {
   width: 100%;
-  max-width: 22rem;
+  max-width: 28rem;
 }
 
 .form h2 {
   margin: 0 0 0.25rem;
   font-size: 1.5rem;
   font-weight: 700;
+  color: var(--text);
 }
 
 .subtitle {
   margin: 0 0 2rem;
-  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .field {
@@ -119,22 +129,25 @@
 .label {
   display: block;
   margin-bottom: 0.375rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
 }
 
 input {
   width: 100%;
+  height: 2.5rem;
   box-sizing: border-box;
-  padding: 0.625rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   font: inherit;
-  border: 1px solid var(--mat-sys-outline-variant, #d1d5db);
+  font-size: 0.875rem;
+  border: 1px solid var(--border);
   border-radius: 0.375rem;
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background: var(--app-bg);
+  color: var(--text);
 
   &:focus {
-    outline: 2px solid var(--mat-sys-primary);
+    outline: 2px solid var(--brand);
     outline-offset: -1px;
     border-color: transparent;
   }
@@ -157,22 +170,27 @@ input {
     padding: 0.25rem;
     border: none;
     background: none;
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--text-muted);
     cursor: pointer;
   }
 }
 
 .submit {
   width: 100%;
+  height: 2.5rem;
   margin-top: 0.5rem;
-  padding: 0.75rem;
   font: inherit;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
   color: #fff;
-  background: var(--mat-sys-primary);
+  background: var(--brand);
   border: none;
   border-radius: 0.375rem;
   cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--brand) 90%, transparent);
+  }
 
   &:disabled {
     opacity: 0.6;
@@ -182,7 +200,7 @@ input {
 
 .error {
   margin-top: 1rem;
-  color: var(--mat-sys-error);
+  color: var(--tone-red-fg);
   font-size: 0.875rem;
 }
 
