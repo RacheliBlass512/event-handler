@@ -8,6 +8,8 @@ import { Tone } from '../tone';
   styleUrl: './badge.scss',
 })
 export class Badge {
-  readonly tone = input<Tone>('neutral');
+  readonly tone = input<Tone>('gray');
   readonly variant = input<'soft' | 'dot'>('soft');
+  /** Small leading character, e.g. the demo's status glyphs ◉ ◎ ▶ ✓ ✕. */
+  readonly glyph = input<string>('');
 }

@@ -17,7 +17,7 @@
   flex-shrink: 0;
 }
 
-@each $tone in info, success, warning, danger, neutral {
+@each $tone in blue, amber, orange, yellow, red, green, gray, slate {
   .stat-icon.tone-#{$tone} {
     background: var(--tone-#{$tone}-bg);
     color: var(--tone-#{$tone}-fg);

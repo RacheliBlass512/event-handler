@@ -11,5 +11,5 @@ export class StatCard {
   readonly icon = input<string>('');
   readonly value = input<string | number>('');
   readonly label = input<string>('');
-  readonly tone = input<Tone>('neutral');
+  readonly tone = input<Tone>('gray');
 }

@@ -21,16 +21,16 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--mat-sys-on-surface-variant);
-  background: var(--tone-neutral-bg);
+  background: var(--tone-gray-bg);
   border-radius: 999px;
 }
 
 .error-banner {
   margin: 0 0 1rem;
   padding: 0.625rem 0.875rem;
-  color: var(--tone-danger-fg);
-  background: var(--tone-danger-bg);
-  border: 1px solid var(--tone-danger-border);
+  color: var(--tone-red-fg);
+  background: var(--tone-red-bg);
+  border: 1px solid var(--tone-red-border);
   border-radius: 0.5rem;
 }
 

@@ -1,5 +1,7 @@
 <span class="badge" [class]="'tone-' + tone() + ' variant-' + variant()">
-  @if (variant() === 'dot') {
+  @if (glyph()) {
+    <span class="glyph">{{ glyph() }}</span>
+  } @else if (variant() === 'dot') {
     <span class="dot"></span>
   }
   <ng-content></ng-content>

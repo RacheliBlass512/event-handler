@@ -13,7 +13,7 @@
   border-radius: 0.5rem;
 }
 
-@each $tone in info, success, warning, danger, neutral {
+@each $tone in blue, amber, orange, yellow, red, green, gray, slate {
   .tone-#{$tone} {
     --accent: var(--tone-#{$tone}-fg);
     --accent-soft: var(--tone-#{$tone}-bg);

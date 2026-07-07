@@ -33,7 +33,7 @@
               <span class="description">{{ event.description }}</span>
             </td>
             <td>
-              <app-badge variant="dot" [tone]="event.status | eventStatusTone">
+              <app-badge [tone]="event.status | eventStatusTone" [glyph]="event.status | eventStatusGlyph">
                 {{ event.status | eventStatusLabel }}
               </app-badge>
             </td>
@@ -43,7 +43,7 @@
               </app-badge>
             </td>
             <td>
-              <app-badge tone="neutral">{{ event.sourceName }}</app-badge>
+              <app-badge tone="slate">{{ event.sourceName }}</app-badge>
             </td>
             <td class="updated">{{ event.updatedAt | timeAgo }}</td>
           </tr>

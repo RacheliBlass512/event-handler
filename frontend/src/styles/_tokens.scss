@@ -16,23 +16,47 @@
   --panel-fg: #c4c9d4;
   --panel-fg-bright: #e2e4e9;
 
-  --tone-info-bg: light-dark(hsl(214 95% 93%), hsl(214 60% 16%));
-  --tone-info-fg: light-dark(hsl(214 84% 32%), hsl(214 90% 80%));
-  --tone-info-border: light-dark(hsl(214 90% 85%), hsl(214 50% 26%));
+  // Badge tone palette. Hue names mirror the demo's Tailwind classes:
+  // blue = status New; amber = Assigned; orange = InProgress + priority High;
+  // yellow = priority Normal; red = Critical; green = Resolved + Low;
+  // gray = Closed/Canceled; slate = source pills. Dots are the demo's *-500 hues.
+  --tone-blue-bg: light-dark(#dbeafe, hsl(217 60% 16%));
+  --tone-blue-fg: light-dark(#1d4ed8, hsl(217 90% 80%));
+  --tone-blue-border: light-dark(#bfdbfe, hsl(217 50% 26%));
+  --tone-blue-dot: #3b82f6;
 
-  --tone-success-bg: light-dark(hsl(142 76% 93%), hsl(142 50% 15%));
-  --tone-success-fg: light-dark(hsl(142 72% 25%), hsl(142 76% 75%));
-  --tone-success-border: light-dark(hsl(142 70% 82%), hsl(142 45% 25%));
+  --tone-amber-bg: light-dark(#fef3c7, hsl(38 60% 14%));
+  --tone-amber-fg: light-dark(#b45309, hsl(38 90% 72%));
+  --tone-amber-border: light-dark(#fde68a, hsl(38 50% 24%));
+  --tone-amber-dot: #f59e0b;
 
-  --tone-warning-bg: light-dark(hsl(45 95% 90%), hsl(45 60% 16%));
-  --tone-warning-fg: light-dark(hsl(32 81% 29%), hsl(45 90% 75%));
-  --tone-warning-border: light-dark(hsl(45 90% 80%), hsl(45 50% 26%));
+  --tone-orange-bg: light-dark(#ffedd5, hsl(25 60% 14%));
+  --tone-orange-fg: light-dark(#c2410c, hsl(25 90% 72%));
+  --tone-orange-border: light-dark(#fed7aa, hsl(25 50% 24%));
+  --tone-orange-dot: #f97316;
 
-  --tone-danger-bg: light-dark(hsl(0 93% 94%), hsl(0 55% 18%));
-  --tone-danger-fg: light-dark(hsl(0 74% 42%), hsl(0 90% 80%));
-  --tone-danger-border: light-dark(hsl(0 90% 86%), hsl(0 50% 28%));
+  --tone-yellow-bg: light-dark(#fef9c3, hsl(50 60% 13%));
+  --tone-yellow-fg: light-dark(#a16207, hsl(50 90% 70%));
+  --tone-yellow-border: light-dark(#fef08a, hsl(50 50% 22%));
+  --tone-yellow-dot: #eab308;
 
-  --tone-neutral-bg: light-dark(hsl(220 14% 93%), hsl(220 14% 20%));
-  --tone-neutral-fg: light-dark(hsl(220 9% 32%), hsl(220 14% 80%));
-  --tone-neutral-border: light-dark(hsl(220 13% 84%), hsl(220 10% 30%));
+  --tone-red-bg: light-dark(#fee2e2, hsl(0 55% 18%));
+  --tone-red-fg: light-dark(#b91c1c, hsl(0 90% 80%));
+  --tone-red-border: light-dark(#fecaca, hsl(0 50% 28%));
+  --tone-red-dot: #ef4444;
+
+  --tone-green-bg: light-dark(#dcfce7, hsl(142 50% 15%));
+  --tone-green-fg: light-dark(#15803d, hsl(142 76% 75%));
+  --tone-green-border: light-dark(#bbf7d0, hsl(142 45% 25%));
+  --tone-green-dot: #22c55e;
+
+  --tone-gray-bg: light-dark(#f3f4f6, hsl(220 14% 20%));
+  --tone-gray-fg: light-dark(#4b5563, hsl(220 14% 80%));
+  --tone-gray-border: light-dark(#e5e7eb, hsl(220 10% 30%));
+  --tone-gray-dot: #9ca3af;
+
+  --tone-slate-bg: light-dark(#f1f5f9, hsl(215 20% 20%));
+  --tone-slate-fg: light-dark(#475569, hsl(215 20% 78%));
+  --tone-slate-border: light-dark(#e2e8f0, hsl(215 16% 30%));
+  --tone-slate-dot: #94a3b8;
 }
