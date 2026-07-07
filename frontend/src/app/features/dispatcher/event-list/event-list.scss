@@ -1,32 +1,39 @@
+// Values taken from the demo's computed styles: 56px white header bar, table in a
+// bordered 8px card with 24px margins, 48px tinted thead, 16px cell padding.
 :host {
   display: block;
-  padding: 1.5rem 2rem;
 }
 
 .page-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin-bottom: 1.5rem;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .page-head h1 {
   margin: 0;
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 
 .count {
-  padding: 0.0625rem 0.5rem;
+  padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--mat-sys-on-surface-variant);
-  background: var(--tone-gray-bg);
+  font-weight: 500;
+  color: light-dark(#363d49, #c4c9d4);
+  background: light-dark(#ebecf0, hsl(220 14% 24%));
   border-radius: 999px;
 }
 
 .error-banner {
-  margin: 0 0 1rem;
+  margin: 1.5rem 1.5rem 0;
   padding: 0.625rem 0.875rem;
   color: var(--tone-red-fg);
   background: var(--tone-red-bg);
@@ -34,10 +41,17 @@
   border-radius: 0.5rem;
 }
 
+app-empty-state {
+  display: block;
+  margin: 1.5rem;
+}
+
 .table-scroll {
   overflow-x: auto;
-  border: 1px solid var(--mat-sys-outline-variant, #e5e7eb);
-  border-radius: 0.75rem;
+  margin: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
 }
 
 .events {
@@ -46,21 +60,28 @@
   font-size: 0.875rem;
 }
 
+.events thead tr {
+  background: light-dark(rgb(235 236 240 / 30%), rgb(255 255 255 / 4%));
+}
+
 .events th {
-  padding: 0.75rem 1rem;
+  height: 3rem;
+  padding: 0 1rem;
   text-align: left;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
-  color: var(--mat-sys-on-surface-variant);
-  border-bottom: 1px solid var(--mat-sys-outline-variant, #e5e7eb);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
   white-space: nowrap;
 }
 
 .events td {
-  padding: 0.875rem 1rem;
-  border-bottom: 1px solid var(--mat-sys-outline-variant, #f0f0f0);
+  padding: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
@@ -69,27 +90,28 @@
 }
 
 .events tbody tr:hover {
-  background: var(--mat-sys-surface-container-lowest, #f9fafb);
+  background: light-dark(rgb(235 236 240 / 30%), rgb(255 255 255 / 3%));
 }
 
 .name .title {
   display: block;
   max-width: 22rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
 }
 
 .name .description {
   display: block;
   max-width: 22rem;
   margin-top: 0.125rem;
-  color: var(--mat-sys-on-surface-variant);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .updated {
-  color: var(--mat-sys-on-surface-variant);
   white-space: nowrap;
 }
