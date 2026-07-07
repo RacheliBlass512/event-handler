@@ -43,3 +43,19 @@ npm install
 npm start
 ```
 Log in at `http://localhost:4200/login` with any of the seeded credentials above.
+
+## Testing a new incoming event
+
+With the Agent running (`cd backend/src/EventHandler.Agent && dotnet run`, listens on
+`http://localhost:5100`), simulate an external sensor with the script in `tools/`:
+
+```powershell
+.\tools\send-event.ps1
+```
+
+By default it POSTs `tools/sample-events/valid-event.json` to the Agent's intake endpoint
+(`POST /events/sensor`) and prints the HTTP status and response body. The new event should
+appear in real time in the dispatcher's events table at `http://localhost:4200`.
+
+To change the event data, edit `tools/sample-events/valid-event.json` (or pass another
+file with `-File`).
